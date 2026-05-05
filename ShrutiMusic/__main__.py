@@ -77,10 +77,11 @@ async def health_check(request):
 async def start_web_server():
     web_app = web.Application()
     web_app.router.add_get("/", health_check)
+    web_app.router.add_get("/health", health_check)
     runner = web.AppRunner(web_app)
     await runner.setup()
-    # Render PORT env variable use karo, default 8080
-    port = int(os.environ.get("PORT", 8080))
+    # Render apna PORT env var automatically set karta hai
+    port = int(os.environ.get("PORT", 10000))
     site = web.TCPSite(runner, "0.0.0.0", port)
     await site.start()
     LOGGER("ShrutiMusic").info(f"Web server started on port {port}")
@@ -104,6 +105,11 @@ async def init():
     ):
         LOGGER(__name__).error("Assistant client variables not defined, exiting...")
         exit()
+
+    # ✅ SABSE PEHLE web server start karo
+    # Render port scan karta hai bot start hone se pehle
+    # Agar port late bind hua toh "No open ports" error aata hai
+    await start_web_server()
 
     await sudo()
 
@@ -140,9 +146,6 @@ async def init():
         pass
 
     await Nand.decorators()
-
-    # Web server PEHLE start karo taaki Render port detect kar sake
-    await start_web_server()
 
     LOGGER("ShrutiMusic").info(
         "\x53\x68\x72\x75\x74\x69\x20\x4d\x75\x73\x69\x63\x20\x53\x74\x61\x72\x74\x65\x64\x20\x53\x75\x63\x63\x65\x73\x73\x66\x75\x6c\x6c\x79\x2e\x0a\x0a\x44\x6f\x6e\x27\x74\x20\x66\x6f\x72\x67\x65\x74\x20\x74\x6f\x20\x76\x69\x73\x69\x74\x20\x40\x53\x68\x72\x75\x74\x69\x42\x6f\x74\x73"
