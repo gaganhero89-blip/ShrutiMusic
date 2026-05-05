@@ -1,3 +1,4 @@
+
 pyrofork
 gTTS
 aiofiles
@@ -16,7 +17,7 @@ opencv-python
 pytz
 pillow>=10.4.0
 psutil
-pytgcalls==1.26.1
+pytgcalls==0.0.24
 pykeyboard
 kurigram==2.1.35
 python-dotenv
