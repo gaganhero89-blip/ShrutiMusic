@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.10-nodejs20
+FROM nikolaik/python-nodejs:python3.11-nodejs20
 
 RUN curl -L https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz \
     -o ffmpeg.tar.xz && \
