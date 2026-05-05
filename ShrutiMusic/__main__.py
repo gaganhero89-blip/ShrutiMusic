@@ -22,6 +22,7 @@
 
 import asyncio
 import importlib
+import os
 from aiohttp import web
 from pyrogram import idle
 from pyrogram.types import BotCommand
@@ -78,9 +79,11 @@ async def start_web_server():
     web_app.router.add_get("/", health_check)
     runner = web.AppRunner(web_app)
     await runner.setup()
-    site = web.TCPSite(runner, "0.0.0.0", 8080)
+    # Render PORT env variable use karo, default 8080
+    port = int(os.environ.get("PORT", 8080))
+    site = web.TCPSite(runner, "0.0.0.0", port)
     await site.start()
-    LOGGER("ShrutiMusic").info("Web server started on port 8080")
+    LOGGER("ShrutiMusic").info(f"Web server started on port {port}")
 
 
 async def setup_bot_commands():
@@ -138,6 +141,7 @@ async def init():
 
     await Nand.decorators()
 
+    # Web server PEHLE start karo taaki Render port detect kar sake
     await start_web_server()
 
     LOGGER("ShrutiMusic").info(
