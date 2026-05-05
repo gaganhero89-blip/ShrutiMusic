@@ -14,9 +14,9 @@ motor
 numpy
 opencv-python
 pytz
-pillow==9.5.0
+pillow>=10.4.0
 psutil
-py-tgcalls==0.9.7
+pytgcalls
 pykeyboard
 kurigram==2.1.35
 python-dotenv
@@ -25,7 +25,7 @@ requests
 speedtest-cli
 spotipy
 tgcrypto
-telegraph 
+telegraph
 unidecode
 youtube-search
 youtube-search-python
